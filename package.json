@@ -1,0 +1,22 @@
+{
+  "name": "curso-mean-ram",
+  "version": "1.0.0",
+  "description": "second class",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronaldram/area51meanone.git"
+  },
+  "author": "ram",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronaldram/area51meanone/issues"
+  },
+  "homepage": "https://github.com/ronaldram/area51meanone#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
