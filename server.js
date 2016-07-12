@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var adminRouter = express.Router();
+var loginRouter = express.Router();
+var errorRouter = express.Router();
 
 app.get('/', function(req,res){
   res.sendFile(path.join(__dirname)+'/index.html');
@@ -21,7 +23,41 @@ adminRouter.param('name', function(req,res,next,name){
   next();
 });
 
-//router
+loginRouter.use(function(req, res, next){
+ console.log('loginRouter.use', req.method, req.url);
+ console.log('loginRouter.login', req.userlogin, req.password);
+ next();
+});
+
+loginRouter.param('userlogin', function(req, res,next,userlogin){
+	console.log('-------userlogin----------')
+	console.log('req userlogin', req.params.userlogin);
+	console.log('userlogin', userlogin);
+
+	if(userlogin=='pepito'){
+		req.userlogin=userlogin;
+	}else{
+		console.log('user invalid!');
+	}
+	console.log('--------userlogin---------')
+	next();
+
+});
+
+loginRouter.param('password', function(req, res, next, password){
+	console.log('-------password----------')
+	if(password=="lima123"){
+		req.password=password;
+		next();
+	}else{
+		console.log('password invalid!');
+		res.redirect('/error');
+	}
+	console.log('-------userlogin----------')
+	
+});
+
+//router - users
 adminRouter.get('/', function(req, res){
 	res.send('Estoy en la pagina princial');
 })
@@ -41,7 +77,30 @@ adminRouter.get('/posts', function(req, res){
 	res.send('Aqui se mostraran los articulos');
 })
 
+//router login
+
+loginRouter.get('/', function(req,res){
+	res.send('Estoy en el login');
+});
+
+
+loginRouter.get('/authenticar/:userlogin/:password', function(req,res){
+	console.log('userlogin view', req.userlogin);
+	console.log('password view', req.password);
+
+	if(req.userlogin && req.password)
+		res.send('Bienvenido Don '+req.userlogin);
+	else 
+		res.send('Usuario Invalido, intentelo nuevamente!');
+});
+
+errorRouter.get('/', function(req, res){
+	res.send('User invalido');
+});
+
+app.use('/userlogins', loginRouter);
 app.use('/admin', adminRouter);
+app.use('/error', errorRouter);
 
 app.set('port', (process.env.PORT || 5000))
 app.listen(app.get('port'));
