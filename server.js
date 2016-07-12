@@ -102,6 +102,25 @@ app.use('/userlogins', loginRouter);
 app.use('/admin', adminRouter);
 app.use('/error', errorRouter);
 
+app.route('/account')
+.get(function(req,res){
+	console.log('account get');
+	res.send('acount get');
+})
+.post(function(req,res){
+	console.log('account post');
+	res.send('acount post');
+})
+.put(function(req,res){
+	console.log('account put');
+	res.send('acount put');
+})
+.delete(function(req,res){
+	console.log('account delete');
+	res.send('acount delete');
+});
+
+
 app.set('port', (process.env.PORT || 5000))
 app.listen(app.get('port'));
 console.log('Here we are go');
