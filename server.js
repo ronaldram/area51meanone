@@ -1,4 +1,8 @@
 var express = require('express');
+var mongoose = require('mongoose');
+//mongoose.connect('mongodb://localhost/pokemon');
+mongoose.connect('mongodb://admin:admin@ds019472.mlab.com:19472/pokemon_ram')
+console.log(mongoose);
 var app = express();
 var path = require('path');
 var adminRouter = express.Router();
@@ -54,7 +58,7 @@ loginRouter.param('password', function(req, res, next, password){
 		res.redirect('/error');
 	}
 	console.log('-------userlogin----------')
-	
+
 });
 
 //router - users
@@ -90,7 +94,7 @@ loginRouter.get('/authenticar/:userlogin/:password', function(req,res){
 
 	if(req.userlogin && req.password)
 		res.send('Bienvenido Don '+req.userlogin);
-	else 
+	else
 		res.send('Usuario Invalido, intentelo nuevamente!');
 });
 
