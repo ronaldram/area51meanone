@@ -65,9 +65,14 @@ apiRouter.route('/users')
     res.json({success:true, message:''});
   });
 })
-.get(function(req,res){
-
-})
+.get(
+  function(req, res){
+	User.find(function(err, users){
+		if(err) return res.send(err);
+		res.json(users);
+ }
+}
+);
 
 //Register our router
 app.use('/api', apiRouter);
