@@ -120,9 +120,14 @@ apiRouter.route('/users/user_name/:user_name')
 //Routers /users/user_id
 apiRouter.route('/pokemons/:pokemon_id')
 .get(function(req,res){
-  Pokemon.findById(req.params.user_id, function(err, pokemon){
+  Pokemon.findById(req.params.pokemon_id, function(err, pokemon){
     if(err) return res.send(err);
-    res.json(pokemon);
+    pokemon.Query=pokemon.Query+1;
+    
+    pokemon.save(function(err){
+      if(err) return res.send(err);
+      res.json(pokemon.sayHi());
+    });
   });
 })
 .put(function(req,res){
