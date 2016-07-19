@@ -28,8 +28,8 @@ app.use(function(req, res, next){
 
 app.use(morgan('dev'));
 //db connection
-mongoose.connect('mongodb://localhost/pokemon');
-//mongoose.connect('mongodb://admin:admin@ds019472.mlab.com:19472/pokemon_ram')
+//mongoose.connect('mongodb://localhost/pokemon');
+mongoose.connect('mongodb://admin:admin@ds019472.mlab.com:19472/pokemon_ram')
 
 //API ROUTERS
 
