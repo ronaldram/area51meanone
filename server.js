@@ -28,8 +28,8 @@ app.use(function(req, res, next){
 
 app.use(morgan('dev'));
 //db connection
-//mongoose.connect('mongodb://localhost/pokemon');
-mongoose.connect('mongodb://admin:admin@ds019472.mlab.com:19472/pokemon_ram')
+mongoose.connect('mongodb://localhost/pokemon');
+//mongoose.connect('mongodb://admin:admin@ds019472.mlab.com:19472/pokemon_ram')
 
 //API ROUTERS
 
@@ -73,6 +73,31 @@ apiRouter.route('/users')
  });
 }
 );
+
+//Routers /users/user_id
+apiRouter.route('/users/:user_id')
+.get(function(req,res){
+  User.findById(req.params.user_id, function(err, user){
+    if(err) return res.send(err);
+    res.json(user);
+  });
+})
+.put(function(req,res){
+  User.findById(req.params.user_id, function(err, user){
+    if(err) return res.send(err);
+    if(req.body.name)user.name = request.body.name;
+    if(req.body.name)user.username = request.body.username;
+    if(req.body.name)user.password = request.body.password;
+    user.save(function(err){
+      if(err) return res.send(err);
+      res.json({message:'Usuario Actualizado'});
+    });
+  });
+})
+.delete(function(req,res){
+
+});
+
 
 //Register our router
 app.use('/api', apiRouter);
