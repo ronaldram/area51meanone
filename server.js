@@ -9,7 +9,7 @@ var path = require('path');
 var bodyParser=require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
-var User = require('./dbscript/User');
+var User = require('./models/User');
 console.log(mongoose);
 
 var port = process.env.PORT || 5000;
