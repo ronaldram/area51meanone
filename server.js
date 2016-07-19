@@ -58,6 +58,7 @@ apiRouter.route('/users')
   user.save(function(err){
     //verify duplicate entry on username
     console.log(err);
+    if(err)
     if(err.code==11000){//mongo retorn this code
       return res.json({sucess:false, message:'El nombre es duplicado'});
     }
