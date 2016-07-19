@@ -117,14 +117,61 @@ apiRouter.route('/users/user_name/:user_name')
   });
 })
 
+//Routers /users/user_id
+apiRouter.route('/pokemons/:pokemon_id')
+.get(function(req,res){
+  Pokemon.findById(req.params.user_id, function(err, pokemon){
+    if(err) return res.send(err);
+    res.json(pokemon);
+  });
+})
+.put(function(req,res){
+  Pokemon.findById(req.params.pokemon_id, function(err, pokemon){
+    if(err) return res.send(err);
+    if(req.body.name)pokemon.name = req.body.name;
+    if(req.body.type)pokemon.type = req.body.type
+    pokemon.save(function(err){
+      if(err) return res.send(err);
+      res.json({message:'Pokemon Actualizado'});
+    });
+  });
+})
+.delete(function(req,res){
+  Pokemon.remove(
+    {_id:req.params.pokemon_id},
+    function(err, pokemon){
+      if(err) return res.send(err);
+      if(pokemon)
+        res.json({message:'Pokemon no existe'});
+      else {
+        res.json({message:'Pokemon eliminado correctamente'});
+      }
+    }
+  );
+});
 
 
 //Routers /pokemons
 apiRouter.route('/pokemons')
-//Create a user through post
+//Create a pokemon through post
 //URL:  http://localhost:5000/api/pokemon
+.post(function(req,res){
+  var pokemon = new Pokemon();
+  pokemon.name = req.body.name;
+  pokemon.type = req.body.type;
+  pokemon.save(function(err){
+    //verify duplicate entry on username
+    console.log(err);
+    if(err)
+    if(err.code==11000){//mongo retorn this code
+      return res.json({sucess:false, message:'El nombre es duplicado de pokemon'});
+    }
+
+    res.json({success:true, message:''});
+  });
+})
 .get(function(req, res){
-	User.find(function(err, pokemons){
+	Pokemon.find(function(err, pokemons){
 		if(err) return res.send(err);
 		res.json(pokemons);
  });
