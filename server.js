@@ -10,6 +10,7 @@ var bodyParser=require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var Pokemon = require('./models/pokemon');
 //console.log(mongoose);
 
 var port = process.env.PORT || 5001;
@@ -99,11 +100,36 @@ apiRouter.route('/users/:user_id')
     {_id:req.params.user_id},
     function(err, user){
       if(err) return res.send(err);
-      res.json({message:'Usuario eliminado correctamente'});
+      if(user)
+        res.json({message:'Usuario no existe'});
+      else {
+        res.json({message:'Usuario eliminado correctamente'});
+      }
     }
   );
 });
 
+apiRouter.route('/users/user_name/:user_name')
+.get(function(req,res){
+  User.findOne({username:req.params.user_name}, function(err, user){
+    if(err) return res.send(err);
+    res.json(user);
+  });
+})
+
+
+
+//Routers /pokemons
+apiRouter.route('/pokemons')
+//Create a user through post
+//URL:  http://localhost:5000/api/pokemon
+.get(function(req, res){
+	User.find(function(err, pokemons){
+		if(err) return res.send(err);
+		res.json(pokemons);
+ });
+}
+);
 
 
 //Register our router
