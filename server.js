@@ -10,9 +10,9 @@ var bodyParser=require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var User = require('./models/user');
-console.log(mongoose);
+//console.log(mongoose);
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 5001;
 
 //APP CONFIGURATION
 app.use(bodyParser.urlencoded({extended:true}));
@@ -85,9 +85,9 @@ apiRouter.route('/users/:user_id')
 .put(function(req,res){
   User.findById(req.params.user_id, function(err, user){
     if(err) return res.send(err);
-    if(req.body.name)user.name = request.body.name;
-    if(req.body.name)user.username = request.body.username;
-    if(req.body.name)user.password = request.body.password;
+    if(req.body.name)user.name = req.body.name;
+    if(req.body.username)user.username = req.body.username;
+    if(req.body.password)user.password = req.body.password;
     user.save(function(err){
       if(err) return res.send(err);
       res.json({message:'Usuario Actualizado'});
@@ -95,8 +95,15 @@ apiRouter.route('/users/:user_id')
   });
 })
 .delete(function(req,res){
-
+  User.remove(
+    {_id:req.params.user_id},
+    function(err, user){
+      if(err) return res.send(err);
+      res.json({message:'Usuario eliminado correctamente'});
+    }
+  );
 });
+
 
 
 //Register our router
