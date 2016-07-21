@@ -193,9 +193,25 @@ apiRouter.route('/pokemons')
 }
 );
 
-apiRouter.route('/pokemons/type/:type')
+apiRouter.route('/pokemons/type/:type/:name')
 .get(function(req, res){
-   Pokemon.find({type:req.params.type}, function(err, pokemons){
+
+
+   Pokemon.find({
+     //type:req.params.type
+     //type: { $regex : new RegExp(req.params.type, "i")},
+     //$or:[
+       //{name: { $regex : new RegExp(req.params.name, "i")}},
+       //{type: { $regex : new RegExp(req.params.type, "i")}}
+     //],
+     //COUNTS
+     //Query:{$gt:0, $lt:20}
+
+     //in(1,2,3) like sql
+     name:{
+       $in:['squirtle','pigeot']
+     }
+   }, function(err, pokemons){
      res.json(pokemons);
    });
 })
