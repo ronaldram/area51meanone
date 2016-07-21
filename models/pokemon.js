@@ -14,6 +14,10 @@ var pockemonSchema = new Schema({
   Query: {
     type:Number,
     default:0
+  },
+  owner:{
+    type: Schema.ObjectId,
+    ref: 'User'
   }
 });
 

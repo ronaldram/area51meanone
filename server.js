@@ -123,7 +123,7 @@ apiRouter.route('/pokemons/:pokemon_id')
   Pokemon.findById(req.params.pokemon_id, function(err, pokemon){
     if(err) return res.send(err);
     pokemon.Query=pokemon.Query+1;
-    
+
     pokemon.save(function(err){
       if(err) return res.send(err);
       res.json(pokemon.sayHi());
@@ -133,8 +133,11 @@ apiRouter.route('/pokemons/:pokemon_id')
 .put(function(req,res){
   Pokemon.findById(req.params.pokemon_id, function(err, pokemon){
     if(err) return res.send(err);
-    if(req.body.name)pokemon.name = req.body.name;
-    if(req.body.type)pokemon.type = req.body.type
+    if(req.body.name) pokemon.name = req.body.name;
+    if(req.body.type) pokemon.type = req.body.type;
+    if(req.body.owner) pokemon.owner = req.body.owner;
+    console.log(pokemon.owner, req.body.owner)
+
     pokemon.save(function(err){
       if(err) return res.send(err);
       res.json({message:'Pokemon Actualizado'});
@@ -164,10 +167,11 @@ apiRouter.route('/pokemons')
   var pokemon = new Pokemon();
   pokemon.name = req.body.name;
   pokemon.type = req.body.type;
+  pokemon.owner = req.body.owner;
   pokemon.save(function(err){
-    //verify duplicate entry on username
-    console.log(err);
-    if(err)
+  //verify duplicate entry on username
+  console.log(err);
+  if(err)
     if(err.code==11000){//mongo retorn this code
       return res.json({sucess:false, message:'El nombre es duplicado de pokemon'});
     }
@@ -176,13 +180,28 @@ apiRouter.route('/pokemons')
   });
 })
 .get(function(req, res){
-	Pokemon.find(function(err, pokemons){
+/*	Pokemon.find(function(err, pokemons){
 		if(err) return res.send(err);
 		res.json(pokemons);
+ });
+ */
+ Pokemon.find({}, function(err, pokemons){
+     User.populate(pokemons, {path:'owner'}, function(err, pokemons){
+       res.status(200).json(pokemons);
+     });
  });
 }
 );
 
+apiRouter.route('/pokemons/type/:type')
+.get(function(req, res){
+   Pokemon.find({type:req.params.type}, function(err, pokemons){
+     res.json(pokemons);
+   });
+})
+.post(function(){
+
+})
 
 //Register our router
 app.use('/api', apiRouter);
