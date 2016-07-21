@@ -186,10 +186,21 @@ apiRouter.route('/pokemons')
  });
  */
  Pokemon.find({}, function(err, pokemons){
-     User.populate(pokemons, {path:'owner'}, function(err, pokemons){
+     User.populate(pokemons, {path:'owner',
+     select:{name:1, username:1},
+     match:{name:'popo'}//,
+     //options:{limit:2}
+      },
+
+     function(err, pokemons){
        res.status(200).json(pokemons);
      });
- });
+ })
+ //.skip(2).limit(4);//.skip(2).limit(4);
+ //.sort({Query:-1}); // query = 1 = asc; query = -1 = desc // case sensitive
+ .select({name:1, type:1, owner:1});//.select('name type');//.select('-name -type');//no aparecen
+ //select({type:0}); todas las columans menos type;
+
 }
 );
 
