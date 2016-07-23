@@ -47,9 +47,9 @@ app.get('/', function(req, res){
 var apiRouter = express.Router();
 
 //Accessed at GET http://localhost:5000/api
-apiRouter.get('/', function(res,res){
-  res.json({message:'Stop to try hit me and hit me!'})
-});
+//apiRouter.get('/', function(res,res){
+//  res.json({message:'Stop to try hit me and hit me!'})
+//});
 
 
 apiRouter.post('/authenticate', function(req, res){
@@ -79,10 +79,21 @@ apiRouter.post('/authenticate', function(req, res){
         );
       }
       //Generar tokens
-
+      ////payload, signature(secretOrprivatyKey), options(header), callback
+      var token = jwt.sign(
+        {
+          name:user.name,
+          username:user.username,
+        },
+        superSecret,
+        {
+          expiresIn:'24h'
+        }
+      );
       return res.json(
         {
           success:true,
+          token:token,
           message:'Usuario es valido.'
         }
       );
@@ -90,8 +101,46 @@ apiRouter.post('/authenticate', function(req, res){
   });
 });
 
+//middleware to verify a token
+apiRouter.use(function(req, res, next){
+  console.log('Alguien ha encontrado a nuestra matrix.')
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  console.log('token', token);
+  if(token){
+    jwt.verify(token, superSecret, function(err, decoded){
+      if(err){
+        return res.json({
+          success:false,
+          message:'Fallo de autenticacion del token.'
+        });
+      }else{
+        req.decoded = decoded;
+        console.log('decodificado:',decoded);
+        next();
+      }
+    });
+    //verity token
+  }else{
+    return res.status(403).send({
+      success:false,
+      message:'No se envio el token.'
+    });
+  }
 
+});
 
+apiRouter.get('/',function(req, res){
+  res.json({
+    message : "welcome to the matrix"
+  });
+});
+
+apiRouter.get('/me',function(req, res){
+  console.log('entro me');
+  return res.json({
+    username : req.decoded.username
+  });
+});
 //Routers /users
 apiRouter.route('/users')
 //Create a user through post
