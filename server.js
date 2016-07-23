@@ -6,12 +6,16 @@ var path = require('path');
 //var loginRouter = express.Router();
 //var errorRouter = express.Router();
 
+var jwt = require('jsonwebtoken');
+
 var bodyParser=require('body-parser');
 var morgan = require('morgan');
 var mongoose = require('mongoose');
 var User = require('./models/user');
 var Pokemon = require('./models/pokemon');
 //console.log(mongoose);
+
+var superSecret = 'strangeThingsHappendInArea51';
 
 var port = process.env.PORT || 5001;
 
@@ -34,18 +38,59 @@ mongoose.connect('mongodb://localhost/pokemon');
 
 //API ROUTERS
 
-//main basic route
+//main basic route.
 app.get('/', function(req, res){
   res.send('welcome to the real world')
 });
 
-//express router instance
+//express router instance.
 var apiRouter = express.Router();
 
 //Accessed at GET http://localhost:5000/api
 apiRouter.get('/', function(res,res){
   res.json({message:'Stop to try hit me and hit me!'})
 });
+
+
+apiRouter.post('/authenticate', function(req, res){
+  User.findOne({
+    username:req.body.username
+  })
+  .select('name username password')
+  .exec(function(err, user){
+    if(err) throw err;
+    //username was not found.
+    if(!user){
+      return res.json(
+        {
+          success:false,
+          message:'Autenticacion ha fallado. Usuario no existe.'
+        }
+      );
+    }else if(user){
+      //validate if password matches.
+      var validPassword = user.comparePassword(req.body.password);
+      if(!validPassword){
+        return res.json(
+          {
+            success:false,
+            message:'Autenticacion ha fallado. Contraseña incorrecta.'
+          }
+        );
+      }
+      //Generar tokens
+
+      return res.json(
+        {
+          success:true,
+          message:'Usuario es valido.'
+        }
+      );
+    }
+  });
+});
+
+
 
 //Routers /users
 apiRouter.route('/users')
