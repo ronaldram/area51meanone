@@ -87,7 +87,8 @@ apiRouter.post('/authenticate', function(req, res){
         },
         superSecret,
         {
-          expiresIn:'24h'
+          //expiresIn:'24h'
+          expiresIn:'1m'
         }
       );
       return res.json(
