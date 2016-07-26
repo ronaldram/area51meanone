@@ -28,6 +28,33 @@
 
       <div class="textFilters">
         {{['Pancho', 'Pistolas', 'Juan', 'Come', 'ceviche'] |  filter : 'v'}}
+
+        {{
+          [
+            {
+              'dish':'rocoto relleno',
+              'city':'arequipa'
+            },
+            {
+              'dish':'adobo',
+              'city': 'arequipa'
+            },
+            {
+              'dish':'quesillo de miel',
+              'city': 'cajamarca'
+            },
+            {
+              'dish':'shambar',
+              'city': 'trujillo'
+            },
+            {
+              'dish':'carapulcra',
+              'city': 'chincha'
+            }
+          ]
+          |
+          filter : {city:'arequipa'}
+        }}
       </div>
     </div>
     <div ng-controller="clockCtrl">
