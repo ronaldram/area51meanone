@@ -1,0 +1,16 @@
+.squares{
+  background-color: #ACEACE;
+  border: 1px solid #CCC;
+}
+
+.squares div{
+  width:100px;
+  height: 200px;
+  border: 1px solid salmon;
+  float:left;
+}
+
+.theclock{
+  clear:both;
+  
+}

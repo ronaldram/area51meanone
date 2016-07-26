@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular 1.X</title>
+    <link rel="stylesheet" href="../angular_sample/css/base.css" type="text/css"/>
+    <script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../angular_sample/js/controllers.js"></script>
+    <script type="text/javascript" src="../angular_sample/js/app.js"></script>
+  </head>
+  <body>
+    <div class="squares" ng-controller="mainCtrl">
+      <div class="ng101">
+        {{"Angular !"}}
+        {{340-345}}
+        <hr>
+        {{message}}
+        <div ng-bind="message"></div>
+      </div>
+      <div class="myFilters">
+        {{name | uppercase}}<br/>
+        {{2345.666 | number:2}}<br/>
+        {{2345.666 | currency:2}}
+      </div>
+
+      <div ng-bind="toLowerCase">
+      </div>
+
+      <div class="textFilters">
+        {{['Pancho', 'Pistolas', 'Juan', 'Come', 'ceviche'] |  filter : 'v'}}
+      </div>
+    </div>
+    <div ng-controller="clockCtrl">
+      <h2>Son las {{clock.now | date: 'medium'}}</h2>
+      <h2>Son las {{clock.now | date: 'short'}}</h2>
+      <h2>Son las {{clock.now | date: 'fullDate'}}</h2>
+      <h2>Son las {{clock.now | date: 'longDate'}}</h2>
+      <h2>Son las {{clock.now | date: 'mediumTime'}}</h2>
+      <h2>Son las {{clock.now | date: 'MMM'}}</h2>
+      <button type="button" ng-click="changeClock()">cambiar fecha/hora</button>
+    </div>
+
+  </body>
+</html>
