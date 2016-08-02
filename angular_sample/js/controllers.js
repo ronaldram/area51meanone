@@ -16,9 +16,13 @@ angular.module('myApp.controllers',[])
     $scope.changeClock = function(){
       updateClock();
     }
-
     /*setInterval(function(){
       $scope.$apply(updateClock);
     }, 100)
     */
+}).controller('citiesCtrl', function($scope, cityService) {
+      $scope.cities = cityService.getCities();
+      $scope.searchCity = function(cityAbbr){
+        $scope.city = cityService.getCity(cityAbbr)[0];
+      }
 });
