@@ -1,6 +1,118 @@
 <div>
   <h1>Pokemon</h1>
-  <p>
-    {{pokemon.message}}
-  </p>
+
+  <div flex-container="row" flex-gutter="24">
+
+          <div flex-item>
+             <div class="card">
+                 <div class="toolbar">
+                     <lx-search-filter>
+                         <input type="text" ng-model="pokemon.name">
+                     </lx-search-filter>
+                 </div>
+             </div>
+         </div>
+      </div>
+
+<div class="p+" flex-container="row" flex-gutter="24" flex-wrap>
+
+  <div flex-item="6">
+
+          <li class="list-row" ng-repeat="pokemone in pokemon.pokemons | filter : {name: pokemon.name}">
+                <div class="list-row__primary">
+                    <img src="bd_pokemon/pokemons/{{ pokemone.name }}.jpg" width="40" height="40" class="img-round">
+                </div>
+
+                <div class="list-row__content">
+                    <span class="display-block"><a href="#" ng-click="pokemon.openDialog(pokemone)">{{ pokemone.name }}</a></span>
+                    <span class="display-block fs-body-1 tc-black-2">{{ pokemone.name }}</span>
+                </div>
+
+                <div class="list-row__secondary">
+                    <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat" ng-click="pokemon.openDialog(pokemone)"></lx-icon>
+                </div>
+            </li>
+
+
+
 </div>
+</div>
+</div>
+<lx-dialog id="dialog1">
+    <lx-dialog-header>
+        <div class="toolbar bgc-primary pl++">
+            <span class="toolbar__label tc-white fs-title">
+                 {{pokemon.pokemonSelected.name}}
+            </span>
+          </div>
+    </lx-dialog-header>
+
+    <lx-dialog-content>
+        <lx-tabs-panes id="lorem-ipsum">
+            <lx-tab-pane>
+              <div class="p++">
+              <div style="float:left; margin-right:130px;">
+                <img src="bd_pokemon/pokemons/{{ pokemon.pokemonSelected.name }}.jpg" class="img-round">
+
+                <strong class="fs-headline display-block"><b>species :</b> {{pokemon.pokemonSelected.species}}</strong>
+                <span class="fs-subhead tc-black-2 display-block"><b>weight :</b>{{pokemon.pokemonSelected.weight}}</span>
+                <span class="fs-subhead tc-black-2 display-block"><b>height :</b>{{pokemon.pokemonSelected.height}}</span>
+
+                <b>Abilities:</b>
+                <div ng-repeat="abi in pokemon.pokemonSelected.abilities">
+                  <span class="fs-subhead tc-black-2 display-block">
+                {{ abi}}
+                <span>
+                </div>
+
+                <b>Evolutions:</b>
+                <span class="fs-subhead tc-black-2 display-block">
+                <div ng-repeat="evo in pokemon.pokemonSelected.evolution">
+                </span>
+                {{ evo}}
+                </div>
+</div>
+<div>
+
+
+
+
+                <b>Types:</b>
+                <div ng-repeat="type in pokemon.pokemonSelected.type">
+                <span class="fs-subhead tc-black-2 display-block">{{ type}}</span>
+                </div>
+
+                <b>Stats:</b>
+                <div>
+                  <span class="fs-subhead tc-black-2 display-block">
+                  attack: {{pokemon.pokemonSelected.stats.attack}}
+                  <br/>
+                  defense:{{pokemon.pokemonSelected.stats.defense}}
+                  <br/>
+                  hp:{{pokemon.pokemonSelected.stats.hp}}
+                  <br/>
+                  sp.atk:{{pokemon.pokemonSelected.stats.sp.atk}}
+                  <br/>
+                  sp.def:{{pokemon.pokemonSelected.stats.sp.def}}
+                  <br/>
+                  speed:{{pokemon.pokemonSelected.stats.speed}}
+                  <br/>
+                  total:{{pokemon.pokemonSelected.stats.total}}
+                  <br/>
+                </span>
+                </div>
+
+                </div>
+</div>
+
+
+
+            </lx-tab-pane>
+        </lx-tabs-panes>
+    </lx-dialog-content>
+
+    <lx-dialog-footer>
+        <lx-button lx-color="black" lx-type="flat" lx-dialog-close>Cancel</lx-button>
+        <lx-button lx-type="flat" lx-dialog-close>Ok</lx-button>
+    </lx-dialog-footer>
+</lx-dialog>

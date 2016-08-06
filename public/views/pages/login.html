@@ -1,14 +1,18 @@
 <div>
   <h1>Login Page</h1>
-  <p>
-    {{login.message}}
-  </p>
-</div>
 
+  <div class="">
+    <div class="p+ pt0">
+        <lx-text-field lx-label="User" lx-allow-clear="true">
+            <input type="text" ng-model="login.user">
+        </lx-text-field>
 
-<div class="p+">
-    <lx-button lx-type="raised">Button</lx-button>
-    <lx-button lx-type="flat">Button</lx-button>
-    <lx-button lx-type="fab"><i class="mdi mdi-plus"></i></lx-button>
-    <lx-button lx-type="icon"><i class="mdi mdi-plus"></i></lx-button>
+        <lx-text-field lx-label="Password" lx-allow-clear="true">
+            <input type="text" ng-model="login.password">
+        </lx-text-field>
+
+        <lx-button lx-type="raised" ng-click="login.authentication()">Login</lx-button>
+    </div>
+  </div>
+
 </div>
