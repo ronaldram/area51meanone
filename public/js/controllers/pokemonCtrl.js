@@ -1,4 +1,4 @@
-angular.module('pokeApp.controllers',[])
+angular.module('pokeApp.pokemonCtrl',[])
 .controller('pokemonCtrl', function(pokemonService, LxDialogService){
   var vm = this;
 
@@ -10,6 +10,7 @@ angular.module('pokeApp.controllers',[])
         console.log('respondio');
         console.log(response);
   });
+  
   vm.openDialog = function(pokemon){
     console.log('open dialogs');
     vm.pokemonSelected = pokemon;

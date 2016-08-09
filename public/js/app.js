@@ -6,6 +6,8 @@ angular.module('pokeApp',
   'pokeApp.pokemonCtrl',
   'pokeApp.userCtrl',
   'pokeApp.pokemonService',
+  'pokeApp.authService',
+  'pokeApp.userService',
   'lumx'
 ]
 );
