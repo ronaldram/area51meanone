@@ -1,0 +1,26 @@
+[
+  {
+    "name":"squirtle",
+    "type":"water"
+  },
+  {
+    "name":"pigeot",
+    "type":"air"
+  },
+  {
+    "name":"bulbasur",
+    "type":"plant"
+  },
+  {
+      "name":"squirtle2",
+      "type":"water"
+  },
+  {
+    "name":"pigeot2",
+    "type":"air"
+  },
+  {
+    "name":"bulbasur2",
+    "type":"plant"
+  }
+]
