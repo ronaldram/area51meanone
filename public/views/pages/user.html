@@ -1,9 +1,36 @@
 <div>
-  <h1>user</h1>
-  <p>
-    {{user.message}}
-  </p>
+  <h1>Users</h1>
+
+  <div flex-container="row" flex-gutter="24">
+
+          <div flex-item>
+             <div class="card">
+                 <div class="toolbar">
+                     <lx-search-filter>
+                         <input type="text" ng-model="user.name">
+                     </lx-search-filter>
+                 </div>
+             </div>
+         </div>
+      </div>
+
+<div class="p+" flex-container="row" flex-gutter="24" flex-wrap>
+
+  <div flex-item="6">
+
+          <li class="list-row" ng-repeat="usuario in user.users | filter : {name: user.name}">
+
+
+                <div class="list-row__content">
+                    <span class="display-block">{{ usuario.name }}</span>
+                    <span class="display-block fs-body-1 tc-black-2">{{ pokemone.username }}</span>
+                </div>
+
+
+            </li>
+
+
+
 </div>
-<div class="p+">
-  <lx-button lx-type="raised">New User</lx-button>
+</div>
 </div>

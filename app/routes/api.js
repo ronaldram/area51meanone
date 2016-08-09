@@ -61,7 +61,7 @@ module.exports = function(app, express){
   });
 
   //middleware to verify a token
-  apiRouter.use(function(req, res, next){
+  /*apiRouter.use(function(req, res, next){
     console.log('Alguien ha encontrado a nuestra matrix.')
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     console.log('token', token);
@@ -86,7 +86,7 @@ module.exports = function(app, express){
       });
     }
 
-  });
+  });*/
 
   apiRouter.get('/',function(req, res){
     res.json({
