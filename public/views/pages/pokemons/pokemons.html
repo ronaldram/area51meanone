@@ -7,7 +7,7 @@
              <div class="card">
                  <div class="toolbar">
                      <lx-search-filter>
-                         <input type="text" ng-model="pokemon.name">
+                         <input type="text" ng-model="pokemons.name">
                      </lx-search-filter>
                  </div>
              </div>
@@ -18,18 +18,18 @@
 
   <div flex-item="6">
 
-          <li class="list-row" ng-repeat="pokemone in pokemon.pokemons | filter : {name: pokemon.name}">
+          <li class="list-row" ng-repeat="pokemone in pokemons.pokemons | filter : {name: pokemon.name}">
                 <div class="list-row__primary">
                     <img src="bd_pokemon/pokemons/{{ pokemone.name }}.jpg" width="40" height="40" class="img-round">
                 </div>
 
                 <div class="list-row__content">
-                    <span class="display-block"><a href="#" ng-click="pokemon.openDialog(pokemone)">{{ pokemone.name }}</a></span>
+                    <span class="display-block"><a href="#" ng-click="pokemons.openDialog(pokemone)">{{ pokemone.name }}</a></span>
                     <span class="display-block fs-body-1 tc-black-2">{{ pokemone.name }}</span>
                 </div>
 
                 <div class="list-row__secondary">
-                    <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat" ng-click="pokemon.openDialog(pokemone)"></lx-icon>
+                    <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat" ng-click="pokemons.openDialog(pokemone)"></lx-icon>
                 </div>
             </li>
 
@@ -42,7 +42,7 @@
     <lx-dialog-header>
         <div class="toolbar bgc-primary pl++">
             <span class="toolbar__label tc-white fs-title">
-                 {{pokemon.pokemonSelected.name}}
+                 {{pokemons.pokemonSelected.name}}
             </span>
           </div>
     </lx-dialog-header>
@@ -52,14 +52,14 @@
             <lx-tab-pane>
               <div class="p++">
               <div style="float:left; margin-right:130px;">
-                <img src="bd_pokemon/pokemons/{{ pokemon.pokemonSelected.name }}.jpg" class="img-round">
+                <img src="bd_pokemon/pokemons/{{ pokemons.pokemonSelected.name }}.jpg" class="img-round">
 
-                <strong class="fs-headline display-block"><b>species :</b> {{pokemon.pokemonSelected.species}}</strong>
-                <span class="fs-subhead tc-black-2 display-block"><b>weight :</b>{{pokemon.pokemonSelected.weight}}</span>
-                <span class="fs-subhead tc-black-2 display-block"><b>height :</b>{{pokemon.pokemonSelected.height}}</span>
+                <strong class="fs-headline display-block"><b>species :</b> {{pokemons.pokemonSelected.species}}</strong>
+                <span class="fs-subhead tc-black-2 display-block"><b>weight :</b>{{pokemons.pokemonSelected.weight}}</span>
+                <span class="fs-subhead tc-black-2 display-block"><b>height :</b>{{pokemons.pokemonSelected.height}}</span>
 
                 <b>Abilities:</b>
-                <div ng-repeat="abi in pokemon.pokemonSelected.abilities">
+                <div ng-repeat="abi in pokemons.pokemonSelected.abilities">
                   <span class="fs-subhead tc-black-2 display-block">
                 {{ abi}}
                 <span>
@@ -67,7 +67,7 @@
 
                 <b>Evolutions:</b>
                 <span class="fs-subhead tc-black-2 display-block">
-                <div ng-repeat="evo in pokemon.pokemonSelected.evolution">
+                <div ng-repeat="evo in pokemons.pokemonSelected.evolution">
                 </span>
                 {{ evo}}
                 </div>
@@ -78,26 +78,26 @@
 
 
                 <b>Types:</b>
-                <div ng-repeat="type in pokemon.pokemonSelected.type">
+                <div ng-repeat="type in pokemons.pokemonSelected.type">
                 <span class="fs-subhead tc-black-2 display-block">{{ type}}</span>
                 </div>
 
                 <b>Stats:</b>
                 <div>
                   <span class="fs-subhead tc-black-2 display-block">
-                  attack: {{pokemon.pokemonSelected.stats.attack}}
+                  attack: {{pokemons.pokemonSelected.stats.attack}}
                   <br/>
-                  defense:{{pokemon.pokemonSelected.stats.defense}}
+                  defense:{{pokemons.pokemonSelected.stats.defense}}
                   <br/>
-                  hp:{{pokemon.pokemonSelected.stats.hp}}
+                  hp:{{pokemons.pokemonSelected.stats.hp}}
                   <br/>
-                  sp.atk:{{pokemon.pokemonSelected.stats.sp.atk}}
+                  sp.atk:{{pokemons.pokemonSelected.stats.sp.atk}}
                   <br/>
-                  sp.def:{{pokemon.pokemonSelected.stats.sp.def}}
+                  sp.def:{{pokemons.pokemonSelected.stats.sp.def}}
                   <br/>
-                  speed:{{pokemon.pokemonSelected.stats.speed}}
+                  speed:{{pokemons.pokemonSelected.stats.speed}}
                   <br/>
-                  total:{{pokemon.pokemonSelected.stats.total}}
+                  total:{{pokemons.pokemonSelected.stats.total}}
                   <br/>
                 </span>
                 </div>

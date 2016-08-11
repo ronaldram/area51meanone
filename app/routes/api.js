@@ -112,11 +112,13 @@ module.exports = function(app, express){
     user.save(function(err){
       //verify duplicate entry on username
       console.log(err);
-      if(err)
-      if(err.code==11000){//mongo retorn this code
-        return res.json({sucess:false, message:'El nombre es duplicado'});
+      if(err){
+        if(err.code==11000){//mongo retorn this code
+          return res.json({sucess:false, message:'El nombre es duplicado'});
+        }
+          return res.json({sucess:false, message:'Error desconocido'});
       }
-
+      
       res.json({success:true, message:''});
     });
   })

@@ -1,0 +1,25 @@
+<div>
+  <h1>Users</h1>
+
+  <form ng-submit="user.register()">
+    <input type="hidden" value="user.userData._id">
+    <div>
+      User Name
+      <input type="text" name="txtUserName" ng-model="user.userData.username">
+    </div>
+    <div>
+      Name
+      <input type="text" name="txtName" ng-model="user.userData.name">
+    </div>
+    <div>
+      Password
+      <input type="text" name="txtPassword" ng-model="user.userData.password">
+    </div>
+
+    <input type="submit" value="Send"/>
+  </form>
+
+
+</div>
+</div>
+</div>
