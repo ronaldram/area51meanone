@@ -9,7 +9,7 @@ angular.module('pokeApp',
   'pokeApp.authService',
   'pokeApp.userService',
   'lumx'
-]
-).config(function($httpProvider){
-    $httpProvider.interceptors.push(AuthInterceptor);
-});
+])
+// ).config(function($httpProvider){
+//     $httpProvider.interceptors.push(AuthInterceptor);
+// });
