@@ -38,9 +38,11 @@
 
       <div class="p+" ng-controller="mainCtrl as main">
              <div class="card">
-                 <div class="card__actions">
+                 <div class="card__actions" ng-if="main.loggedIn">
                      <lx-button lx-color="orange" lx-type="flat" ng-click="main.goToPage('/users')">Usuarios</lx-button>
                      <lx-button lx-color="orange" lx-type="flat" ng-click="main.goToPage('/pokemons')">Pokemons</lx-button>
+
+                     <lx-button lx-color="orange" lx-type="flat" ng-click="main.logout()">Logout</lx-button>
                  </div>
                  <div flex-container="row">
                      <div flex-item flex-container="column">

@@ -1,5 +1,5 @@
-angular.module('pokeApp.pokemonCtrl',[['pokeApp.userService']])
-.controller('pokemonsCtrl', function(pokemonService, user){
+angular.module('pokeApp.pokemonCtrl',['pokeApp.userService'])
+.controller('pokemonsCtrl', function(user, pokemonService){
   var vm = this;
 
   vm.DialogId = 'dialog1';

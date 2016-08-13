@@ -1,10 +1,19 @@
 angular.module('pokeApp.loginCtrl',[])
-.controller('loginCtrl', function($http, $location, pokemonService){
+.controller('loginCtrl', function($http, $location, pokemonService, authService){
   var vm = this;
+  vm.userAuthenticage = {};
   vm.message = 'This is the login';
 
   vm.authentication = function(){
-    $location.path('/pokemons');
+     authService.login(vm.userAuthenticage.username,  vm.userAuthenticage.password).then(function(response){
+       console.log(response);
+       if(response.data.success){
+          $location.path('/pokemons');
+        }else {
+          alert('Invalid user');
+        }
+      });
+
   }
 
   vm.getPokemons = function(){
